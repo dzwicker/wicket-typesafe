@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dzwicker/wicket-typesafe.png)](https://travis-ci.org/dzwicker/wicket-typesafe)
+
 wicket-typesafe
 ===============
 
