@@ -103,12 +103,12 @@
       </plugin>
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-maven-plugin</artifactId>
-        <version>2.1</version>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.4.4</version>
+        <extensions>true</extensions>
         <configuration>
+          <serverId>sonatype-nexus-staging</serverId>
           <nexusUrl>https://oss.sonatype.org</nexusUrl>
-          <targetRepositoryId>Releases</targetRepositoryId>
-          <serverAuthId>sonatype-nexus-staging</serverAuthId>
         </configuration>
       </plugin>
     </plugins>
