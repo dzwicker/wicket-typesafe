@@ -1,0 +1,6 @@
+target/
+/.idea/artifacts
+/.idea/dictionaries
+/.idea/libraries/Maven_*
+/.idea/workspace.xml
+/.idea/tasks.xml
