@@ -11,7 +11,7 @@
   <groupId>com.github.dzwicker.wicket</groupId>
   <artifactId>wicket-typesafe</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <name>Wicket Typesafe</name>
   <description>Wicket typesafe helps to generate wicket-ids in a type safe way.</description>
   <url>http://dzwicker.github.com/wicket-typesafe/</url>
