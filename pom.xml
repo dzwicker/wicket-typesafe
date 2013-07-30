@@ -17,6 +17,7 @@
   <url>http://dzwicker.github.com/wicket-typesafe/</url>
 
   <properties>
+    <github.global.server>github</github.global.server>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.java.version>1.7</project.build.java.version>
     <version.slf4j-api>1.7.5</version.slf4j-api>
@@ -102,12 +103,12 @@
       </plugin>
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.4.4</version>
-        <extensions>true</extensions>
+        <artifactId>nexus-maven-plugin</artifactId>
+        <version>1.7</version>
         <configuration>
-          <serverId>sonatype-nexus-staging</serverId>
           <nexusUrl>https://oss.sonatype.org</nexusUrl>
+          <targetRepositoryId>Releases</targetRepositoryId>
+          <serverAuthId>sonatype-nexus-staging</serverAuthId>
         </configuration>
       </plugin>
     </plugins>
