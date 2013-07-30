@@ -32,6 +32,26 @@ public class TestBean implements TestInterface {
     }
 
     @Override
+    public String getTestgetGetter() {
+        return "test";
+    }
+
+    @Override
+    public String getTestisGetter() {
+        return "test";
+    }
+
+    @Override
+    public boolean isTestgetGetter() {
+        return false;
+    }
+
+    @Override
+    public boolean isTestisGetter() {
+        return false;
+    }
+
+    @Override
     public TestInterface getChild() {
         return this;
     }

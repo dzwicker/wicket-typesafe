@@ -21,8 +21,8 @@ public class InterfaceMethodInterceptor implements MethodInterceptor {
 
     private static final Logger log = LoggerFactory.getLogger(InterfaceMethodInterceptor.class);
 
-    private static final Pattern GET = Pattern.compile("get");
-    private static final Pattern IS = Pattern.compile("is");
+    private static final Pattern GET = Pattern.compile("^get");
+    private static final Pattern IS = Pattern.compile("^is");
     private static final Method parentMethod;
     private static final Method generateMethod;
     private static final Method parentGenerateMethod;

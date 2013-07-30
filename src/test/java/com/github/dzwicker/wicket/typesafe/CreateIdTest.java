@@ -69,6 +69,26 @@ public class CreateIdTest {
     }
 
     @Test
+    public void shouldGenerateIdForGetterWithGETInName() {
+        final TestInterface of = of(TestInterface.class);
+        final String generatedId1 = id(of.getTestgetGetter());
+        final String generatedId2 = id(of.isTestgetGetter());
+
+        assertThat(generatedId1, equalTo("testgetGetter"));
+        assertThat(generatedId2, equalTo("testgetGetter"));
+    }
+
+    @Test
+    public void shouldGenerateIdForGetterWithISInName() {
+        final TestInterface of = of(TestInterface.class);
+        final String generatedId1 = id(of.getTestisGetter());
+        final String generatedId2 = id(of.isTestisGetter());
+
+        assertThat(generatedId1, equalTo("testisGetter"));
+        assertThat(generatedId2, equalTo("testisGetter"));
+    }
+
+    @Test
     public void shouldGenerateIdForRecursiveGetter() {
         final TestBean originalBean = new TestBean("justNotANoArgs");
         final String generatedId = id(of(originalBean).getObject().getObject());

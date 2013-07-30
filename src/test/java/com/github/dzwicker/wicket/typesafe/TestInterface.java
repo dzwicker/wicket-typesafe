@@ -12,6 +12,14 @@ public interface TestInterface {
 
     TestInterface getObject();
 
+    String getTestgetGetter();
+
+    String getTestisGetter();
+
+    boolean isTestgetGetter();
+
+    boolean isTestisGetter();
+
     TestInterface getChild();
 
     TestInterface getBean();
