@@ -11,4 +11,8 @@ public interface TestInterface {
     Integer value();
 
     TestInterface getObject();
+
+    TestInterface getChild();
+
+    TestInterface getBean();
 }

@@ -23,11 +23,13 @@ public class InterfaceMethodInterceptor implements MethodInterceptor {
 
     private static final Pattern GET = Pattern.compile("get");
     private static final Pattern IS = Pattern.compile("is");
+    private static final Method parentMethod;
     private static final Method generateMethod;
     private static final Method parentGenerateMethod;
 
     static {
         try {
+            parentMethod = CreateId.TYPE_SAFE_WICKET_ID_INTERFACE.getMethod("getParent");
             generateMethod = CreateId.TYPE_SAFE_WICKET_ID_INTERFACE.getMethod("typeSafeWicketIdGenerate");
             parentGenerateMethod = CreateId.TYPE_SAFE_WICKET_ID_INTERFACE.getMethod("typeSafeWicketIdGenerate",
                     StringBuilder.class);
@@ -49,6 +51,10 @@ public class InterfaceMethodInterceptor implements MethodInterceptor {
     public Object intercept(final Object self, final Method method, final Object[] args,
             final MethodProxy methodProxy)
             throws Throwable {
+
+        if (method.equals(parentMethod)) {
+            return parent;
+        }
 
         if (method.equals(generateMethod)) {
             final StringBuilder builder = new StringBuilder();
@@ -105,10 +111,7 @@ public class InterfaceMethodInterceptor implements MethodInterceptor {
         if (method.getParameterTypes().length != 0) {
             return false;
         }
-        if (void.class.equals(method.getReturnType())) {
-            return false;
-        }
-        return true;
+        return !void.class.equals(method.getReturnType());
     }
 
 }

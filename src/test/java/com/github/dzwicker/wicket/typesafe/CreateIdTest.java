@@ -85,6 +85,26 @@ public class CreateIdTest {
     }
 
     @Test
+    public void shouldGenerateIdsAfterRecursiveGetterReturnFinalJDKClass() {
+        final TestInterface of = of(TestInterface.class);
+        final String generatedId1 = id(of.getObject().getInteger());
+        final String generatedId2 = id(of.getString());
+
+        assertThat(generatedId1, equalTo("object.integer"));
+        assertThat(generatedId2, equalTo("string"));
+    }
+
+    @Test
+    public void shouldGenerateIdsAfterRecursiveGetter() {
+        final TestInterface of = of(TestInterface.class);
+        final String generatedId1 = id(of.getChild().getBean());
+        final String generatedId2 = id(of.getBean());
+
+        assertThat(generatedId1, equalTo("child.bean"));
+        assertThat(generatedId2, equalTo("bean"));
+    }
+
+    @Test
     public void shouldGenerateProxyWithNewInterfaceForInterfaceOfClassObject() {
         final TestInterface proxy = of(TestInterface.class);
 

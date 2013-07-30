@@ -14,7 +14,8 @@ public class CreateId {
     static final Class<TypeSafeWicketId> TYPE_SAFE_WICKET_ID_INTERFACE = TypeSafeWicketId.class;
     private static final Class<?>[] EMPTY = {};
 
-    private static final ThreadLocal<TypeSafeWicketId> RECORDERS = new ThreadLocal<>();
+    private static final ThreadLocal<TypeSafeWicketId> ROOT_RECORDER = new ThreadLocal<>();
+    private static final ThreadLocal<TypeSafeWicketId> LAST_RECORDER = new ThreadLocal<>();
 
     private CreateId() {
     }
@@ -48,8 +49,15 @@ public class CreateId {
         Enhancer.registerCallbacks(proxyClass, new Callback[] {new InterfaceMethodInterceptor(parent)});
 
         final T proxy = (T) ObjenesisHelper.newInstance(proxyClass);
-        RECORDERS.set((TypeSafeWicketId) proxy);
+        saveProxy((TypeSafeWicketId) proxy);
         return proxy;
+    }
+
+    private static <T> void saveProxy(final TypeSafeWicketId typeSafeWicketId) {
+        if (typeSafeWicketId.getParent() == null) {
+            ROOT_RECORDER.set(typeSafeWicketId);
+        }
+        LAST_RECORDER.set(typeSafeWicketId);
     }
 
     public static String id(final Object obj) {
@@ -57,9 +65,15 @@ public class CreateId {
         if (obj instanceof TypeSafeWicketId) {
             typeSafeWicketId = (TypeSafeWicketId) obj;
         } else {
-            typeSafeWicketId = RECORDERS.get();
+            typeSafeWicketId = LAST_RECORDER.get();
         }
-        return typeSafeWicketId.typeSafeWicketIdGenerate();
+        final String generatedId = typeSafeWicketId.typeSafeWicketIdGenerate();
+        resetRecorder();
+        return generatedId;
+    }
+
+    private static void resetRecorder() {
+        LAST_RECORDER.set(ROOT_RECORDER.get());
     }
 
 }

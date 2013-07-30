@@ -5,4 +5,6 @@ public interface TypeSafeWicketId {
     String typeSafeWicketIdGenerate();
 
     void typeSafeWicketIdGenerate(StringBuilder builder);
+
+    TypeSafeWicketId getParent();
 }

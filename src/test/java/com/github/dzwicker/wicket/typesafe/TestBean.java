@@ -30,4 +30,14 @@ public class TestBean implements TestInterface {
     public TestInterface getObject() {
         return new TestBean("justNotANoArgs");
     }
+
+    @Override
+    public TestInterface getChild() {
+        return this;
+    }
+
+    @Override
+    public TestInterface getBean() {
+        return this;
+    }
 }
