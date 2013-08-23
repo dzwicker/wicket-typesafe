@@ -36,7 +36,58 @@
 <h1>
 <a name="wicket-typesafe" class="anchor" href="#wicket-typesafe"><span class="octicon octicon-link"></span></a>wicket-typesafe</h1>
 
-<p>Wicket typesafe helps to generate wicket-ids in a type safe way.</p>
+<p>Wicket typesafe helps to generate wicket-ids in a type safe way. So it helps to solve the refactoring problem when using PropertyModel or CompoundPropertyModel.</p>
+
+<h4>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h4>
+
+<p>Currently it can be used to construct refactor safe property expressions.</p>
+
+<p>For example, using wicket-typesafe module the following code that depends on strings:</p>
+
+<pre><code>Person person = new Person();
+IModel&lt;Person&gt; personModel=Model.of(person);
+setDefaultModel(personModel);
+add(new Label("street.name"));
+</code></pre>
+
+<p>can be replaced with the following:</p>
+
+<pre><code>Person person = new Person();
+IModel&lt;Person&gt; personModel=Model.of(person);
+setDefaultModel(personModel);
+add(new Label(id(of(Person.class).getStreet().getName())));
+</code></pre>
+
+<p>although the code is a more verbose then its string alternative it will generate
+a compile time error should any properties change instead of failing at runtime
+like its more concise string alternative.</p>
+
+<p>The module can generate ids and supports:</p>
+
+<ul>
+<li>Not final Classes</li>
+<li>Interfaces</li>
+<li>All getter return types even final ones</li>
+<li>of(XXX.class) can be stored in a static way</li>
+<li>id(XXXX) can be stored in a static way</li>
+</ul><h4>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h4>
+
+<p>Add the following dependencies into your pom.xml</p>
+
+<pre><code>&lt;dependency&gt;
+&lt;groupId&gt;com.github.dzwicker.wicket&lt;/groupId&gt;
+&lt;artifactId&gt;wicket-typesafe&lt;/artifactId&gt;
+    &lt;version&gt;${typesafe.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h4>
+<a name="building-metagen-from-source" class="anchor" href="#building-metagen-from-source"><span class="octicon octicon-link"></span></a>Building MetaGen from source</h4>
+
+<p>Just use maven:
+    mvn install</p>
       </section>
     </div>
 
