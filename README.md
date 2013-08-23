@@ -5,7 +5,7 @@ wicket-typesafe
 
 Wicket typesafe helps to generate wicket-ids in a type safe way. So it helps to solve the refactoring problem when using PropertyModel or CompoundPropertyModel.
 
-#### Features
+### Features
 Currently it can be used to construct refactor safe property expressions.
 
 For example, using wicket-typesafe module the following code that depends on strings:
@@ -34,7 +34,7 @@ The module can generate ids and supports:
 * id(XXXX) can be stored in a static way
 
 
-#### Installation
+### Installation
 Add the following dependencies into your pom.xml
 
 	<dependency>
@@ -43,7 +43,16 @@ Add the following dependencies into your pom.xml
 		<version>${typesafe.version}</version>
 	</dependency>
 
+### Can I use this? What's the license?
+It's only locally-tested code, so take it with a grain of salt for now.
 
-#### Building MetaGen from source
+The license is Apache 2.0, so you can do almost anything you like.
+
+### Building MetaGen from source
 Just use maven:
     mvn install
+    
+### Acknowledgements 
+The idea for this was lifted wholesale from the [LambdaJ-based proposal on the Wicket wiki](https://cwiki.apache.org/WICKET/working-with-wicket-models.html#WorkingwithWicketmodels-LambdaJ).
+Instead of pulling in LambdaJ as a dependency, SafeModel uses jMock's ClassImposteriser directly (both LambdaJ and Mockito use that as well). The code was also simplified to not
+require the root object's class to be passed in.
